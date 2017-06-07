@@ -33,3 +33,14 @@ func CreateUser(userStr string, passStr string) int64 {
 	return id
 
 }
+
+// 查找用户
+func FindUserByName(userStr string, password string) User {
+
+	o := orm.NewOrm()
+	var user User
+	err := o.QueryTable("user").Filter("userName", userStr).Filter("passWord", password).One(&user)
+	if err != nil {log.Fatal(err)}
+	return user
+
+}
